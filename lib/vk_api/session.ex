@@ -25,9 +25,9 @@ defmodule VkApi.Session do
 
   @spec get_type(VkApi.Session.t()) :: {:error, map} | {:user | :group_id, integer}
   def get_type(session = %Session{}) do
-    case VkApi.Api.act(session, "groups.getById") do
+    case VkApi.act(session, "groups.getById") do
       {:error, _} ->
-        case VkApi.Api.act(session, "users.get") do
+        case VkApi.act(session, "users.get") do
           {:error, _err} = e -> e
           {:ok, [%{"id" => id}]} -> {:user, id}
         end

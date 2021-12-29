@@ -39,11 +39,11 @@ defmodule VkApi.Longpoll.Api do
       case session do
         %Session{type: :group, id: id} = session ->
           fn ->
-            VkApi.Api.act(session, "groups.getLongPollServer", %{"group_id" => id})
+            VkApi.act(session, "groups.getLongPollServer", %{"group_id" => id})
           end
 
         %Session{type: :user} = session ->
-          VkApi.Api.act(session, "messages.getLongPollServer")
+          VkApi.act(session, "messages.getLongPollServer")
       end
 
     process_getting_server_info(fun)
@@ -51,13 +51,13 @@ defmodule VkApi.Longpoll.Api do
 
   defp fun_get_server_info(%Session{type: :group, id: id} = session) do
     process_getting_server_info(fn ->
-      VkApi.Api.act(session, "groups.getLongPollServer", %{"group_id" => id})
+      VkApi.act(session, "groups.getLongPollServer", %{"group_id" => id})
     end)
   end
 
   defp fun_get_server_info(%Session{type: :user} = session) do
     process_getting_server_info(fn ->
-      VkApi.Api.act(session, "messages.getLongPollServer")
+      VkApi.act(session, "messages.getLongPollServer")
     end)
   end
 
