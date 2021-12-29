@@ -1,7 +1,8 @@
 defmodule VkApi.Api do
   @base_url URI.parse("https://api.vk.com/method/")
-  @token Application.fetch_env!(:vk_api, :token)
-  @v Application.fetch_env!(:vk_api, :version)
+  @v Application.compile_env(:vk_api, :version, "5.131")
+
+  @type session :: VkApi.Session.t()
 
   @spec request_url(String.t(), Enum.t()) :: Strint.t()
   defp request_url(method, params) do
@@ -11,11 +12,11 @@ defmodule VkApi.Api do
     |> URI.to_string()
   end
 
-  @spec act(binary, map) :: {:ok, map | list} | {:error, map}
-  def act(method, params \\ %{}) do
+  @spec act(session, binary, map) :: {:ok, map | list} | {:error, map}
+  def act(session, method, params \\ %{}) do
     params =
       params
-      |> Map.put("access_token", @token)
+      |> Map.put("access_token", session.token)
       |> Map.put("v", @v)
 
     request_url(method, params)
