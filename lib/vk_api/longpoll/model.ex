@@ -1,7 +1,7 @@
-defmodule VkApi.Longpoll.Model do
+defmodule VKAPI.Longpoll.Model do
   defstruct mode: 0, need_pts: 0
 
-  alias VkApi.Longpoll
+  alias VKAPI.Longpoll
 
   @type t :: %Longpoll.Model{
           mode: integer(),

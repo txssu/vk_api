@@ -1,4 +1,4 @@
-# VkApi
+# VKAPI
 
 **TODO: Add description**
 

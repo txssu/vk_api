@@ -1,4 +1,4 @@
-defmodule VkApi.HTTPClient do
+defmodule VKAPI.HTTPClient do
   @spec request(String.t()) :: {:ok, map} | {:error, map}
   def request(url, options \\ []) do
     case HTTPoison.post(url, "", [], options) do

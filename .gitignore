@@ -27,3 +27,6 @@ vk_api-*.tar
 
 # Secret config files
 *.secret.exs
+
+# ElixirLS files
+.elixir_ls

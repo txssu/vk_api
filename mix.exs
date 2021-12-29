@@ -1,4 +1,4 @@
-defmodule VkApi.MixProject do
+defmodule VKAPI.MixProject do
   use Mix.Project
 
   def project do

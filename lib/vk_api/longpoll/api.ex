@@ -1,6 +1,6 @@
-defmodule VkApi.Longpoll.Api do
-  alias VkApi.Session
-  alias VkApi.Longpoll
+defmodule VKAPI.Longpoll.Api do
+  alias VKAPI.Session
+  alias VKAPI.Longpoll
 
   @type t :: {String.t(), String.t(), String.t()}
 
@@ -39,11 +39,11 @@ defmodule VkApi.Longpoll.Api do
       case session do
         %Session{type: :group, id: id} = session ->
           fn ->
-            VkApi.act(session, "groups.getLongPollServer", %{"group_id" => id})
+            VKAPI.act(session, "groups.getLongPollServer", %{"group_id" => id})
           end
 
         %Session{type: :user} = session ->
-          VkApi.act(session, "messages.getLongPollServer")
+          VKAPI.act(session, "messages.getLongPollServer")
       end
 
     process_getting_server_info(fun)
@@ -51,13 +51,13 @@ defmodule VkApi.Longpoll.Api do
 
   defp fun_get_server_info(%Session{type: :group, id: id} = session) do
     process_getting_server_info(fn ->
-      VkApi.act(session, "groups.getLongPollServer", %{"group_id" => id})
+      VKAPI.act(session, "groups.getLongPollServer", %{"group_id" => id})
     end)
   end
 
   defp fun_get_server_info(%Session{type: :user} = session) do
     process_getting_server_info(fn ->
-      VkApi.act(session, "messages.getLongPollServer")
+      VKAPI.act(session, "messages.getLongPollServer")
     end)
   end
 
@@ -77,7 +77,7 @@ defmodule VkApi.Longpoll.Api do
     result =
       url_params(session, server_info)
       |> request_url()
-      |> VkApi.HTTPClient.request(recv_timeout: :infinity)
+      |> VKAPI.HTTPClient.request(recv_timeout: :infinity)
       |> parse_response()
 
     case result do

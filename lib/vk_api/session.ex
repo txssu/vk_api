@@ -1,4 +1,4 @@
-defmodule VkApi.Session do
+defmodule VKAPI.Session do
   alias __MODULE__, as: Session
 
   defstruct token: "", type: nil, id: 0, longpoll: nil
@@ -6,7 +6,7 @@ defmodule VkApi.Session do
   @type t :: %Session{
           token: String.t(),
           type: atom,
-          longpoll: VkApi.Longpoll.Model | nil
+          longpoll: VKAPI.Longpoll.Model | nil
         }
 
   @spec new(String.t()) :: t
@@ -19,15 +19,15 @@ defmodule VkApi.Session do
     end
   end
 
-  def set_longpoll(session = %Session{}, longpoll = %VkApi.Longpoll.Model{}) do
+  def set_longpoll(session = %Session{}, longpoll = %VKAPI.Longpoll.Model{}) do
     Map.put(session, :longpoll, longpoll)
   end
 
-  @spec get_type(VkApi.Session.t()) :: {:error, map} | {:user | :group_id, integer}
+  @spec get_type(VKAPI.Session.t()) :: {:error, map} | {:user | :group_id, integer}
   def get_type(session = %Session{}) do
-    case VkApi.act(session, "groups.getById") do
+    case VKAPI.act(session, "groups.getById") do
       {:error, _} ->
-        case VkApi.act(session, "users.get") do
+        case VKAPI.act(session, "users.get") do
           {:error, _err} = e -> e
           {:ok, [%{"id" => id}]} -> {:user, id}
         end

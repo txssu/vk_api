@@ -1,4 +1,4 @@
-defmodule VkApi.Longpoll do
+defmodule VKAPI.Longpoll do
   alias __MODULE__, as: Longpoll
 
   defdelegate get_server_info(sesion), to: Longpoll.Api, as: :get_server_info

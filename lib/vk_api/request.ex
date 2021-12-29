@@ -1,8 +1,8 @@
-defmodule VkApi.Request do
+defmodule VKAPI.Request do
   @base_url URI.parse("https://api.vk.com/method/")
   @v Application.compile_env(:vk_api, :version, "5.131")
 
-  @type session :: VkApi.Session.t()
+  @type session :: VKAPI.Session.t()
 
   @spec request_url(String.t(), Enum.t()) :: Strint.t()
   defp request_url(method, params) do
@@ -20,7 +20,7 @@ defmodule VkApi.Request do
       |> Map.put("v", @v)
 
     request_url(method, params)
-    |> VkApi.HTTPClient.request()
+    |> VKAPI.HTTPClient.request()
     |> parse_response()
   end
 

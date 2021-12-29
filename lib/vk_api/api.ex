@@ -1,5 +1,5 @@
-defmodule VkApi do
-  import VkApi
+defmodule VKAPI do
+  alias VKAPI.{Session, Request}
 
   @spec act(Session.t(), String.t(), map) :: {:error, map} | {:ok, list | map}
   defdelegate act(session, method, params \\ %{}), to: Request
